@@ -1,13 +1,14 @@
 import React from 'react';
+import Connect4App from './Connect4App/Connect4App.jsx'
 
-class App extends React.Component {
+export default class App extends React.Component {
   render() {
   console.log("API_KEY: " + API_KEY);
     return (
-     <div style={{textAlign: 'center'}}>
-        <h1>Welcome to Connect Four</h1>
+     <div id="container">
+        <h1>Connect Four</h1>
+
+        <Connect4App/>
       </div>);
   }
 }
-
-export default App;

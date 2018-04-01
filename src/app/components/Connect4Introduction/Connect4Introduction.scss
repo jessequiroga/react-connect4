@@ -1,0 +1,63 @@
+.overlay {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: rgba(0, 0, 0, 0.7);
+    transition: opacity 500ms;
+}
+#popupIntro .popup{
+    margin-top: 25px;
+}
+
+#popupUserName .popup{
+    margin-top: 150px;
+}
+.popup{
+    margin: 30px auto;
+    padding: 20px;
+    border: 10px solid #fff;
+    background: rgb(59, 95, 183);
+    border-radius: 10px;
+    width: 60%;
+    position: relative;
+    transition: all 5s ease-in-out;
+    color: #fff;
+
+    h1 {
+        height: 20px;
+        margin-top: 0;
+        padding-top: 15px;
+        margin-bottom: 20px;
+        background-color: #ffffff;
+        color: #d87a09;
+        position: absolute;
+        top:0;
+        left:0;
+        right: 0;
+    }  
+    .content{
+        height:450px;
+        overflow: auto;
+        font-family: 'Exo', sans-serif;
+        padding: 5px;
+        width: 80%;
+        margin: 50px auto;
+    }
+}
+
+.flex{
+    display: flex;
+    justify-content: space-around;
+}
+
+.closeInstruction {
+    width: 100%;
+    position: absolute;
+    bottom: 0;
+    left:0;
+    right:0;
+    padding:12px 5px;
+    font-size: 15px;
+}

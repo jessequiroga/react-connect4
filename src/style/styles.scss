@@ -1,5 +1,62 @@
 $backgroundColor: #e6e6e6;
 
+$buttonBorder: rgba(255, 185, 33, 0.88);
+$buttonShadow: #c46f08;
+$mainColor1: #3b5fb7;
+$mainColor2: #d87a09;
+$mainColor2light: rgba(255, 185, 33, 0.88);
+$mainColor2dark: #c46f08;
+$mainColor2darker: #4e2b06;
+
+*{
+    font-family: 'Orbitron', sans-serif;
+    font-weight: 400;
+    font-size: 15px;
+    letter-spacing: 1px;
+}
+
 body {
+	margin: 40px 30px;
   background-color: $backgroundColor;
 }
+
+#container{
+    position: absolute;
+    width:auto;
+    height: auto;
+    min-width: 300px;
+    min-height: 530px;
+    padding: 20px 100px 70px 100px;
+    margin-left: 100px;
+    text-align: center;
+    background-color: #ffffff;
+    box-shadow: 0 2px 6px rgba(100, 100, 100, 0.3);
+}
+
+h1{
+    font-weight: 800;
+    font-size: 1.5em;
+    color: $mainColor1;
+    padding-bottom: 30px;
+    margin-bottom: 40px;
+    border-bottom: 1px solid #ededed;
+}
+
+.fancyButton{
+    padding:20px 10px;
+    border: 3px solid $mainColor2light;
+    font-size: 14px;
+    background-color: $mainColor2;
+    color: whitesmoke;
+
+    &:hover{
+    	box-shadow: inset 0 0 0 1px $mainColor2dark,0 2px 15px  $mainColor2darker; /*#a35c07;*/
+    }
+    &:active {
+    	box-shadow: inset 0 0 0 1px $mainColor2dark,inset 0 2px 30px $mainColor2darker;
+		}
+		&:focus {
+    	box-shadow: inset 0 0 0 1px $mainColor2dark,inset 0 2px 30px $mainColor2darker;
+		}
+}
+
