@@ -1,5 +1,5 @@
 import React from 'react';
-import Connect4App from './Connect4App/Connect4App.jsx'
+import Connect4 from './Connect4App/Connect4App.jsx'
 
 export default class App extends React.Component {
   render() {
@@ -8,7 +8,7 @@ export default class App extends React.Component {
      <div id="container">
         <h1>Connect Four</h1>
 
-        <Connect4App/>
-      </div>);
+        <Connect4/>
+     </div>);
   }
 }

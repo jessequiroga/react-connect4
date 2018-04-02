@@ -4,8 +4,8 @@ import './Connect4Introduction.scss';
 export default class Connect4Introduction extends React.Component {
   render() {
     return (
-      <div id="popupIntro" className="overlay">
-        <div className="popup">
+    <div className="connect4__introduction overlay">
+        <div className="popup__container">
             <h1>Game instructions</h1>
 
             <div className="content">
@@ -24,8 +24,9 @@ export default class Connect4Introduction extends React.Component {
                 or more of his playing pieces horizontally, vertically or diagonally in a line. The game ends in a draw
                 if the board is completely filled without a player has formed a four-line.
                 
-                <button className="closeInstruction fancyButton" onClick={this.props.closePopup}>Close</button>
-
+                <div className="btn__container">
+                    <button className="btn__primary btn__large" onClick={this.props.closePopup}>Close</button>
+                </div>
             </div>
         </div>
     </div>

@@ -42,7 +42,7 @@ export default class Connect4App extends React.Component {
 
   render() {
     return (
-     <div className="app">
+     <div className="connect4__app">
         {this.state.gameStart ?   
           <Connect4Game config={this.state.config} onGameStop={this.setGameStop.bind(this)}/> : 
           <Connect4Setting 

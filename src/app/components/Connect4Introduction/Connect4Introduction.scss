@@ -1,3 +1,5 @@
+@import "../../../style/header.scss";
+
 .overlay {
     position: fixed;
     top: 0;
@@ -7,18 +9,12 @@
     background: rgba(0, 0, 0, 0.7);
     transition: opacity 500ms;
 }
-#popupIntro .popup{
-    margin-top: 25px;
-}
 
-#popupUserName .popup{
-    margin-top: 150px;
-}
-.popup{
+.popup__container{
     margin: 30px auto;
     padding: 20px;
     border: 10px solid #fff;
-    background: rgb(59, 95, 183);
+    background: $mainColor1;
     border-radius: 10px;
     width: 60%;
     position: relative;
@@ -30,8 +26,8 @@
         margin-top: 0;
         padding-top: 15px;
         margin-bottom: 20px;
-        background-color: #ffffff;
-        color: #d87a09;
+        background-color: #fff;
+        color: $mainColor2;
         position: absolute;
         top:0;
         left:0;
@@ -45,19 +41,4 @@
         width: 80%;
         margin: 50px auto;
     }
-}
-
-.flex{
-    display: flex;
-    justify-content: space-around;
-}
-
-.closeInstruction {
-    width: 100%;
-    position: absolute;
-    bottom: 0;
-    left:0;
-    right:0;
-    padding:12px 5px;
-    font-size: 15px;
 }

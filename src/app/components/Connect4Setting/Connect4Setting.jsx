@@ -6,62 +6,62 @@ import './Connect4Setting.scss'
 export default function Connect4Setting({onGameStart, onSave, config}) {
 
     return (
-      <div className="setting">
-
-        <h2>Please enter your names:</h2>
-        <div className="flex">
-            <div className="setting__labelPlayer player1"></div>
-            <div className="setting__labelPlayer player2"> </div>
-        </div><br/>
-        <div className="flex">
-         
-          <input className="setting__input"
-              placeholder="Player 1"
-              name="player1"
-              onChange={changeString}
-              type="text"
-              value={config.player1} />
-          <input className="setting__input"
-                placeholder="Player 2"
-                name="player2"
+      <div className="connect4__setting">
+        <div className="players">
+          <div className="flex">
+              <label className="label_player player1"></label>
+              <label className="label_player player2"> </label>
+          </div>
+          <div className="flex">
+            <input className="input"
+                placeholder="Player 1"
+                name="player1"
                 onChange={changeString}
                 type="text"
-                value={config.player2} />
+                value={config.player1} />
+            <input className="input"
+                  placeholder="Player 2"
+                  name="player2"
+                  onChange={changeString}
+                  type="text"
+                  value={config.player2} />
+          </div>
         </div>
-        <br/><br/>
-        <hr/>
 
-        <h2>Setting</h2>
-        <div className="flex">
-          <label className="setting__label">Cols:</label>
-          <input className="setting__input"
-              name="cols"
-              onChange={changeNumber}
-              type="number"
-              value={config.cols}
-          />
+        
+        <div className="gameboard">
+          <h2>Gameboard Settings:</h2>
+          <div className="flex">
+            <label className="label">Cols:</label>
+            <input className="input"
+                name="cols"
+                onChange={changeNumber}
+                type="number"
+                value={config.cols}
+            />
+          </div>
+          <div className="flex">
+            <label className="label">Row:</label>
+            <input className="input"
+                name="rows"
+                onChange={changeNumber}
+                type="number"
+                value={config.rows}
+            />
+          </div>
+          <div className="flex">
+            <label className="label">Length:</label>
+            <input className="input"
+                name="length"
+                onChange={changeNumber}
+                type="number"
+                value={config.length}
+            />
+          </div>
         </div>
-        <div className="flex">
-          <label className="setting__label">Row:</label>
-          <input className="setting__input"
-              name="rows"
-              onChange={changeNumber}
-              type="number"
-              value={config.rows}
-          />
-        </div>
-        <div className="flex">
-          <label className="setting__label">Length:</label>
-          <input className="setting__input"
-              name="length"
-              onChange={changeNumber}
-              type="number"
-              value={config.length}
-          />
-        </div>
-        <br/><br/>
-        <div className="flex buttonContainer">
-          <button className="fancyButton start" onClick={handleClick} type="button">
+
+        <div className="btn__container">
+          <button className="btn__primary btn__large" onClick={handleClick} type="button">
           Start <i className="fa fa-play-circle fa-lg" aria-hidden="true"></i> </button>
         </div>
       </div>);

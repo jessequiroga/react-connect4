@@ -1,0 +1,38 @@
+.btn__container{
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  justify-content: stretch;  
+}
+
+.btn__primary{
+    padding:20px 10px;
+    border: 3px solid $mainColor2light;
+    font-size: 14px;
+    background-color: $mainColor2;
+    color: whitesmoke;
+
+    &:hover{
+        box-shadow: inset 0 0 0 1px $mainColor2dark,0 2px 5px $mainColor2darker;
+    }
+    &:active {
+        box-shadow: inset 0 0 0 1px $mainColor2dark,inset 0 2px 15px $mainColor2darker;
+    }
+    &:focus {
+        box-shadow: inset 0 0 0 1px $mainColor2dark,inset 0 2px 15px $mainColor2darker;
+    }
+}
+
+.btn__small{
+  width: 20%;
+}
+
+.btn__medium{
+  width: 60%;
+}
+
+.btn__large{
+  width: 100%;
+}
