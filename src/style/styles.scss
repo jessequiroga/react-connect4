@@ -16,7 +16,7 @@ $mainColor2darker: #4e2b06;
 }
 
 body {
-	margin: 40px 30px;
+  margin: 40px 30px;
   background-color: $backgroundColor;
 }
 
@@ -25,7 +25,7 @@ body {
     width:auto;
     height: auto;
     min-width: 300px;
-    min-height: 530px;
+    min-height: 330px;
     padding: 20px 100px 70px 100px;
     margin-left: 100px;
     text-align: center;
@@ -40,6 +40,13 @@ h1{
     padding-bottom: 30px;
     margin-bottom: 40px;
     border-bottom: 1px solid #ededed;
+}
+
+.buttonContainer{
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
 }
 
 .fancyButton{

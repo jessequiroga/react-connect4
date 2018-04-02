@@ -1,0 +1,30 @@
+.start{
+    width: 100%;
+}
+
+.setting__label{
+	width: 150px;
+	margin: 3px;
+}
+
+
+.setting__labelPlayer{
+    z-index: 100;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+}
+
+.player1{
+	    /*background: url("../../../img/red.png") !important;
+	    background-repeat: no-repeat;*/
+	    background-color: red;
+	    border: solid #b22222 3px !important;
+	}
+
+	.player2{
+	    /*background-image: url("../../../img/red.png") !important;
+	    background-repeat: no-repeat;*/
+	    background-color: #efef0f;
+	    border: solid #f9e202 3px !important;
+	}

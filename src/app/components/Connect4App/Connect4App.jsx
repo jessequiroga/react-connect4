@@ -1,41 +1,55 @@
 import React from 'react';
-import Connect4Introduction from '../Connect4Introduction/Connect4Introduction.jsx';
+import Connect4Game from '../Connect4Game/Connect4Game.jsx';
+import Connect4Setting from '../Connect4Setting/Connect4Setting.jsx';
 import './Connect4App.scss'
 
 export default class Connect4App extends React.Component {
   constructor() {
     super();
     this.state = {
-      showInstructions: false
+      config: {
+        length: 4,
+        cols: 7,
+        rows: 6,
+        player1: 'Player 1',
+        player2: 'Player 2'
+      },
+      gameStart: false
     };
   }
-  toggleInstructions() {
+
+  setConfig(name, value) {
+    var config = this.state.config;
+    config[name] = value;
     this.setState({
-      showInstructions: !this.state.showInstructions
+      config: config
     });
-  }
+
+    console.log(this.state.config);
+  };
+
+  setGameStart() {
+    this.setState({
+      gameStart: true
+    });
+  };
+
+  setGameStop() {
+    this.setState({
+      gameStart: false
+    });
+  };
 
   render() {
     return (
-     <div className="connect4__app">
-
-        <p className="player">current Player <span className="curPlayer">1</span></p><br/>
-        <div className="flex">
-
-            <button className="playerName fancyButton">Change Playername </button>
-
-            <button className="info fancyButton"
-              onClick={this.toggleInstructions.bind(this)}>
-              <i className="fa fa-info" aria-hidden="true"></i>
-            </button>
-            {this.state.showInstructions ? 
-              <Connect4Introduction closePopup={this.toggleInstructions.bind(this)} />
-              : null
-            }
-
-            <button className="reset fancyButton"><span id="restart">Restart</span></button>
-        </div>
-        
+     <div className="app">
+        {this.state.gameStart ?   
+          <Connect4Game config={this.state.config} onGameStop={this.setGameStop.bind(this)}/> : 
+          <Connect4Setting 
+            onGameStart={this.setGameStart.bind(this)}
+            onSave={this.setConfig.bind(this)}
+            config={this.state.config}/> 
+        }
       
       </div>);
   }
