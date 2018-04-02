@@ -1,9 +1,9 @@
 import React from 'react';
 import Connect4Game from '../Connect4Game/Connect4Game.jsx';
 import Connect4Setting from '../Connect4Setting/Connect4Setting.jsx';
-import './Connect4App.scss'
+import './Connect4Container.scss'
 
-export default class Connect4App extends React.Component {
+export default class Connect4Container extends React.Component {
   constructor() {
     super();
     this.state = {
@@ -42,7 +42,9 @@ export default class Connect4App extends React.Component {
 
   render() {
     return (
-     <div className="connect4__app">
+      <div className="connect4__container">
+        <h1>Connect Four</h1>
+         
         {this.state.gameStart ?   
           <Connect4Game config={this.state.config} onGameStop={this.setGameStop.bind(this)}/> : 
           <Connect4Setting 
@@ -50,7 +52,8 @@ export default class Connect4App extends React.Component {
             onSave={this.setConfig.bind(this)}
             config={this.state.config}/> 
         }
-      
+       <div id="copyright">created by Christa & Christina</div>
+
       </div>);
   }
 }

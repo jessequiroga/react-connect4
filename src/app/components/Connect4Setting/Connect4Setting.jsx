@@ -27,7 +27,6 @@ export default function Connect4Setting({onGameStart, onSave, config}) {
                   value={config.player2} />
           </div>
         </div>
-
         
         <div className="gameboard">
           <h2>Gameboard Settings:</h2>
@@ -36,6 +35,7 @@ export default function Connect4Setting({onGameStart, onSave, config}) {
             <input className="input"
                 name="cols"
                 onChange={changeNumber}
+                onBlur={validate}
                 type="number"
                 value={config.cols}
             />
@@ -45,6 +45,7 @@ export default function Connect4Setting({onGameStart, onSave, config}) {
             <input className="input"
                 name="rows"
                 onChange={changeNumber}
+                onBlur={validate}
                 type="number"
                 value={config.rows}
             />
@@ -54,6 +55,7 @@ export default function Connect4Setting({onGameStart, onSave, config}) {
             <input className="input"
                 name="length"
                 onChange={changeNumber}
+                onBlur={validate}
                 type="number"
                 value={config.length}
             />
@@ -68,23 +70,25 @@ export default function Connect4Setting({onGameStart, onSave, config}) {
 
 
     function validateBoardSize(value) {
-      if (value < 4) {
-        return 4;
-      } else if (value > 25) {
-        return 25;
-      }
+      if (value < 4) return 4;
+      if (value > 25) return 25;
       return Number(value);
     }
 
-    function changeString(event) {
+    function validate(event){
       const name = event.target.name;
-      const value = event.target.value;
+      const value = validateBoardSize(event.target.value);
       onSave(name, value);
+    }
+
+    function changeString(event) {
+      const target = event.target;
+      onSave(target.name, target.value);
     }
 
     function changeNumber(event){
       const name = event.target.name;
-      const value = validateBoardSize(event.target.value);
+      const value = Number(event.target.value);
       onSave(name, value);
     }
 

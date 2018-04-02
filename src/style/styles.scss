@@ -9,22 +9,10 @@
 }
 
 body {
-  margin: 40px 30px;
+  margin: 45px;
   background-color: $backgroundColor;
 }
 
-#container{
-    position: absolute;
-    width:auto;
-    height: auto;
-    min-width: 300px;
-    min-height: 330px;
-    padding: 20px 100px 70px 100px;
-    margin-left: 100px;
-    text-align: center;
-    background-color: #fff;
-    box-shadow: 0 2px 6px rgba(100, 100, 100, 0.3);
-}
 
 h1{
     font-weight: 800;

@@ -1,14 +1,14 @@
 import React from 'react';
-import Connect4 from './Connect4App/Connect4App.jsx'
+import Connect4 from './Connect4Container/Connect4Container.jsx'
 
 export default class App extends React.Component {
   render() {
-  console.log("API_KEY: " + API_KEY);
+  	console.log("API_KEY: " + API_KEY);
     return (
-     <div id="container">
-        <h1>Connect Four</h1>
+    	<div className="connect4__app">
 
-        <Connect4/>
-     </div>);
+    	 <Connect4/>
+    	</div>
+     );
   }
 }
