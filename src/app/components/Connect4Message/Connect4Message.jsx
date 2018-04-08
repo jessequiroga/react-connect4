@@ -6,12 +6,10 @@ export default class Connect4Message extends React.Component {
 	render() {
     return (
       <p className="player">
-      		current Player 
+      		{this.props.message}
       		<span className="currPlayer">  {this.props.currPlayer}</span>
           <br/>
-
       </p>
-
           
   	)
 	}

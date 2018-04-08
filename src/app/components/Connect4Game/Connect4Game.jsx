@@ -24,7 +24,29 @@ export default class Connect4Game extends React.Component {
   }
 
   insertToken(col){
-    console.log("Click " + col);
+    let player = 3-this.state.currPlayer
+    let game_state = "_RUNNING"
+    let board = this.cloneBoard(this.state.board);
+    const row = this.getTokenRow(board, col);
+    board[row][col] = player
+
+    this.setState({
+      currPlayer: player,
+      game_state: game_state,
+      board: board
+    });
+  }
+
+  getTokenRow(board, col) {
+    let row = board.length - 1;
+    while(board[row][col]) {
+      row--;
+    }
+    return row;
+  }
+
+  cloneBoard(board) {
+    return board.map(row => [...row]);
   }
 
   componentWillMount() {
@@ -48,18 +70,18 @@ export default class Connect4Game extends React.Component {
       <div className="connect4__game">
 
         <Connect4Board state={this.state.state} 
-            onInsertToken={this.insertToken}
+            onInsertToken={this.insertToken.bind(this)}
             board={this.state.board} 
             config={this.props.config}/>
 
 
         <div className="connect4__message">
           {this.state.game_state === '_RUNNING' && (
-            <Connect4Message currPlayer={this.currentPlayerName.bind(this)()}/>
+            <Connect4Message message="Current Player: " currPlayer={this.currentPlayerName.bind(this)()}/>
           )}
 
-          {this.state.game_state === '_GameOver' && (
-            <p>{this.currentPlayerName.bind(this) } win</p>
+          {this.state.game_state === '_GAMEOVER' && (
+            <Connect4Message message="Winner is: " currPlayer={this.currentPlayerName.bind(this)()}/>
           )}
         </div>
 
