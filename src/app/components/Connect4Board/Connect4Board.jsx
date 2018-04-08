@@ -2,6 +2,8 @@ import React from 'react';
 import './Connect4Board.scss'
 
 import Connect4Cell from '../Connect4Cell/Connect4Cell.jsx';
+import Connect4InputCell from '../Connect4Cell/Connect4InputCell.jsx';
+
 
 export default class Connect4Board extends React.Component {
   constructor() {
@@ -16,7 +18,7 @@ export default class Connect4Board extends React.Component {
     let rowInput = board[0].map((col, colIndex) => {
       return (
         <div className="Connect4Board__cell" key={colIndex} id={colIndex}>
-          <div className="col" id={colIndex}></div>
+          <Connect4InputCell col={colIndex} onInsertToken={this.props.onInsertToken} />
         </div>
       )
     });
