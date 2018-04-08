@@ -4,12 +4,29 @@ import Connect4Board from '../Connect4Board/Connect4Board.jsx';
 import './Connect4Game.scss'
 
 export default class Connect4Game extends React.Component {
-  constructor() {
-    super();
-    this.state = {
-      showInstructions: false
-    }; 
+  /* Board */
+  initBoard(cols, rows) {
+    const board = [];
+    for (let i = 0; i < cols; i++) {
+      board[i] = [];
+      for (let j = 0; j < rows; j++) {
+        board[i][j] = null;
+      }
+    }
+    return board;
   }
+
+  componentWillMount() {
+    const board = this.initBoard(this.props.config.rows, this.props.config.cols);
+    this.setState({
+      showInstructions: false,
+      board,
+      currentPlayer: "PLAYER_1",
+      state: "_RUNNING"
+    });
+  }
+
+
 
   toggleInstructions() {
     this.setState({
@@ -21,7 +38,8 @@ export default class Connect4Game extends React.Component {
     return (
       <div className="connect4__game">
 
-        <Connect4Board config={this.props.config}/>
+        <Connect4Board state={this.state.state} board={this.state.board} 
+            config={this.props.config}/>
 
         <div className="btn__container">
           <button className="btn__primary btn__small" onClick={this.props.onGameStop}>
