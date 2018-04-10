@@ -2,7 +2,11 @@
   "name": "connect4",
   "version": "1.0.0",
   "main": "index.js",
-  "keywords": [ "reactjs", "connect4","game" ],
+  "keywords": [
+    "reactjs",
+    "connect4",
+    "game"
+  ],
   "scripts": {
     "start": "webpack-dev-server --mode development",
     "watch": "webpack -d --watch",
@@ -15,6 +19,7 @@
     "path": "^0.12.7",
     "react": "^16.3.0",
     "react-dom": "^16.3.0",
+    "url-loader": "^1.0.1",
     "webpack": "^4.4.1",
     "webpack-dev-server": "^3.1.1"
   },

@@ -55,6 +55,10 @@ var config = {
         include : APP_DIR,
         exclude: /node_modules/,
         use: "babel-loader"
+      }, 
+      {
+        test: /\.(png|jpg)$/,
+        loader: 'url-loader'
       }
     ]
   },

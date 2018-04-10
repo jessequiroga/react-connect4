@@ -9,8 +9,8 @@ export default function Setting({onGameStart, onSave, config}) {
       <div className="component__settings">
         <div className="players">
           <div className="flex">
-              <label className="label_player player1"></label>
-              <label className="label_player player2"> </label>
+              <label className="labelPlayer player1"></label>
+              <label className="labelPlayer player2"> </label>
           </div>
           <div className="flex">
             <input className="input"

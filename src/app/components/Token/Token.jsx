@@ -11,13 +11,13 @@ export default class Token extends React.Component {
   componentDidMount() {
     setTimeout(() =>
       this.setState({
-      top: `${this.props.row * 50 + 2 }px`
+      top: `${this.props.row * 50 + 5.5 }px`
     }),10);
   }
 
   render() {
     const css = {
-      left: `${this.props.col * 50 + 3.5 }px`,
+      left: `${this.props.col * 50 + 6.5 }px`,
       top: this.state.top
     };
     let playerClass = this.props.player < 0 ? -this.props.player :  this.props.player
