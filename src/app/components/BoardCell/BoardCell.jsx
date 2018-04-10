@@ -1,7 +1,6 @@
 import React from 'react';
 
-
-export default class Connect4Cell extends React.Component {
+export default class BoardCell extends React.Component {
  
   render() {
 	  	var tokenWinClass='';

@@ -1,6 +1,6 @@
 import React from 'react';
 
-export default class Connect4InputCell extends React.Component {
+export default class InputCell extends React.Component {
 
   onClick(){ 
   	this.props.onInsertToken(this.props.col);

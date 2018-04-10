@@ -1,10 +1,10 @@
 import React from 'react';
-import './Connect4Introduction.scss';
+import './Introduction.scss';
 
-export default class Connect4Introduction extends React.Component {
+export default class Introduction extends React.Component {
   render() {
     return (
-    <div className="connect4__introduction overlay">
+    <div className="component__introduction overlay">
         <div className="popup__container">
             <h1>Game instructions</h1>
 

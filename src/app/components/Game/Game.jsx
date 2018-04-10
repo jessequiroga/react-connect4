@@ -1,10 +1,10 @@
 import React from 'react';
-import Connect4Introduction from '../Connect4Introduction/Connect4Introduction.jsx';
-import Connect4Board from '../Connect4Board/Connect4Board.jsx';
-import Connect4Message from '../Connect4Message/Connect4Message.jsx';
-import './Connect4Game.scss'
+import Introduction from '../Introduction/Introduction.jsx';
+import Board from '../Board/Board.jsx';
+import Status from '../Status/Status.jsx';
+import './Game.scss'
 
-export default class Connect4Game extends React.Component {
+export default class Game extends React.Component {
 
   initBoard(cols, rows) {
     const board = [];
@@ -157,24 +157,23 @@ export default class Connect4Game extends React.Component {
 
   render() {
     return (
-      <div className="connect4__game">
+      <div className="component__game">
 
-        <Connect4Board gameRunning={this.state.game_state == '_RUNNING'} 
+        <Board gameRunning={this.state.game_state == '_RUNNING'} 
             onInsertToken={this.insertToken.bind(this)}
             board={this.state.board} 
             config={this.props.config}/>
 
 
-        <div className="connect4__message">
+        <div className="component__status">
           {this.state.game_state === '_RUNNING' && (
-            <Connect4Message message="Current Player: " currPlayer={this.currentPlayerName.bind(this)()}/>
+            <Status message="Current Player: " currPlayer={this.currentPlayerName.bind(this)()}/>
           )}
 
           {this.state.game_state === '_GAMEOVER' && (
-            <Connect4Message message="Winner is: " currPlayer={this.currentPlayerName.bind(this)()}/>
+            <Status message="Winner is: " currPlayer={this.currentPlayerName.bind(this)()}/>
           )}
         </div>
-
 
         <div className="btn__container">
           <button className="btn__primary btn__small" onClick={this.props.onGameStop}>
@@ -189,7 +188,7 @@ export default class Connect4Game extends React.Component {
         </div>
         
         {this.state.showInstructions ? 
-            <Connect4Introduction closePopup={this.toggleInstructions.bind(this)} /> : null
+            <Introduction closePopup={this.toggleInstructions.bind(this)} /> : null
         }
         
       </div>);

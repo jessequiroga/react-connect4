@@ -1,11 +1,8 @@
 import React from 'react';
-import './Connect4Board.scss'
-
-
-import Connect4Token from '../Connect4Token/Connect4Token.jsx';
-import Connect4Cell from '../Connect4Cell/Connect4Cell.jsx';
-import Connect4InputCell from '../Connect4Cell/Connect4InputCell.jsx';
-
+import Token from '../Token/Token.jsx';
+import Connect4Cell from '../BoardCell/BoardCell.jsx';
+import Connect4InputCell from '../BoardCell/InputCell.jsx';
+import './Board.scss'
 
 export default class Connect4Board extends React.Component {
   constructor() {
@@ -39,7 +36,7 @@ export default class Connect4Board extends React.Component {
                 <Connect4Cell col={colIndex} row={rowIndex} win={cellValue < 0} />
                 
                 {(cellValue != null) &&
-                  <Connect4Token player={cellValue} col={colIndex} key={`${rowIndex}-${colIndex}`}
+                  <Token player={cellValue} col={colIndex} key={`${rowIndex}-${colIndex}`}
                   row={rowIndex} />
                 }
 
@@ -53,7 +50,6 @@ export default class Connect4Board extends React.Component {
           
     return (
       <div className="connect4__board">
-
         <div className="gameboard">
           <div className="row input">
             {rowInput}
@@ -63,6 +59,7 @@ export default class Connect4Board extends React.Component {
           </div>
         </div>
         <br/>
+        
       </div>
     );
   }

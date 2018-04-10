@@ -1,12 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import './Connect4Setting.scss'
+import './Settings.scss'
 
-export default function Connect4Setting({onGameStart, onSave, config}) {
+export default function Setting({onGameStart, onSave, config}) {
 
     return (
-      <div className="connect4__setting">
+      <div className="component__settings">
         <div className="players">
           <div className="flex">
               <label className="label_player player1"></label>
@@ -99,7 +99,7 @@ export default function Connect4Setting({onGameStart, onSave, config}) {
 }
 
 
-Connect4Setting.propTypes = {
+Setting.propTypes = {
   config: PropTypes.shape({
     cols: PropTypes.number.isRequired,
     lineLength: PropTypes.number.isRequired,
@@ -111,4 +111,4 @@ Connect4Setting.propTypes = {
   onGameStart: PropTypes.func.isRequired
 };
 
-Connect4Setting.defaultProps = {};
+Setting.defaultProps = {};
