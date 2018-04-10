@@ -17,6 +17,16 @@ export default class Connect4Game extends React.Component {
     return board;
   }
 
+  restart(){
+    const board = this.initBoard(this.props.config.rows, this.props.config.cols);
+    this.setState({
+      showInstructions: false,
+      board,
+      currPlayer: 1,
+      game_state: "_RUNNING"
+    });
+  }
+
   currentPlayerName(){
     if(this.state.currPlayer == 1)
       return this.props.config.player1;
@@ -90,7 +100,7 @@ export default class Connect4Game extends React.Component {
           <button className="btn__primary btn__small" onClick={this.props.onGameStop}>
             <i className="fa fa-cogs fa-lg" aria-hidden="true"></i>
           </button>
-          <button className="btn__primary btn__medium">
+          <button className="btn__primary btn__medium" onClick={this.restart.bind(this)}>
             Restart <i className="fa fa-refresh" aria-hidden="true"></i>
           </button>
           <button className="btn__primary btn__small" onClick={this.toggleInstructions.bind(this)}>

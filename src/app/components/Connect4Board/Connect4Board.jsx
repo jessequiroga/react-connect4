@@ -20,9 +20,13 @@ export default class Connect4Board extends React.Component {
 
     let rowInput = board[0].map((col, colIndex) => {
       return (
-        <div className="Connect4Board__cell" key={colIndex} id={colIndex}>
+        
+        <div className="cellContainer" key={colIndex} id={colIndex}>
+          {!col && 
           <Connect4InputCell col={colIndex} onInsertToken={this.props.onInsertToken} />
+          }
         </div>
+        
       )
     });
 
@@ -31,7 +35,7 @@ export default class Connect4Board extends React.Component {
         <div className="row"  key={rowIndex} >
           {row.map((cellValue, colIndex) => {
              return (
-              <div className="Connect4Board__cell" key={colIndex} id={`${rowIndex}-${colIndex}`} >
+              <div className="cellContainer" key={colIndex} id={`${rowIndex}-${colIndex}`} >
                 <Connect4Cell col={colIndex} row={rowIndex} />
                 
                 {cellValue &&
@@ -48,18 +52,14 @@ export default class Connect4Board extends React.Component {
           
     return (
       <div className="connect4__board">
-        <p>Hello {this.props.config.player1} and {this.props.config.player2}!</p>
 
         <div className="gameboard">
-        
-
           <div className="row input">
             {rowInput}
           </div>
           <div className="playField">
             {rows}
           </div>
-
         </div>
         <br/>
       </div>
