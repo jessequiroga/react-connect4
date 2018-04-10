@@ -34,11 +34,22 @@ export default class Connect4Game extends React.Component {
   }
 
   insertToken(col){
-    let player = 3-this.state.currPlayer
-    let game_state = "_RUNNING"
+    let player = this.state.currPlayer;
+    let game_state = "_RUNNING";
     let board = this.cloneBoard(this.state.board);
     const row = this.getTokenRow(board, col);
     board[row][col] = player
+
+    let isConnect4 = this.checkMatch(player, col, row, board);
+    if (!isConnect4) {
+      player = 3-this.state.currPlayer
+    } else{
+      for (var i = 0; i < isConnect4.length; i++) {
+        var token = isConnect4[i];
+        board[token.rowIndex][token.columnIndex] = -board[token.rowIndex][token.columnIndex];
+      }
+      game_state = '_GAMEOVER'
+    }
 
     this.setState({
       currPlayer: player,
@@ -46,6 +57,75 @@ export default class Connect4Game extends React.Component {
       board: board
     });
   }
+
+  checkMatch(player, colIndex, rowIndex, board){
+    let gameOver = false;
+    var winningTokens = [];
+    gameOver |= this._checkInDirection(winningTokens, player, colIndex, rowIndex, 1, 0, "horizontal", board);
+    gameOver |= this._checkInDirection(winningTokens, player, colIndex, rowIndex, 0, 1, "vertical", board);
+    gameOver |= this._checkInDirection(winningTokens, player, colIndex, rowIndex, 1, 1, "upwards", board);
+    gameOver |= this._checkInDirection(winningTokens, player, colIndex, rowIndex, -1, 1, "downwards", board);
+
+    if (gameOver) {
+      return winningTokens;
+    }
+    return false;
+  }
+
+  _checkInDirection(allTokens, symbol, columnIndex, rowIndex, dColumnIndex, dRowIndex, directionLabel, board) {
+        var maxLineLength = this.props.config.lineLength;
+        var tokens = [
+            { columnIndex:columnIndex, rowIndex:rowIndex }
+        ];
+
+        // check the one direction
+        var lineLength = this._checkInDirectionRec(tokens, symbol, columnIndex, rowIndex,
+            dColumnIndex, dRowIndex, maxLineLength - 2, board);
+        // subtract 1 for the "own" token, minus one for the recursion
+
+
+        //add 1 for own token, substract 2 for "own" token, minus one for recursion
+        lineLength += 1 + this._checkInDirectionRec(tokens, symbol, columnIndex, rowIndex,
+            -dColumnIndex, -dRowIndex, maxLineLength - 2 - lineLength, board);
+
+        // if a line is found, copy its tokens to the referenced array
+        if (lineLength >= maxLineLength) {
+            for (var i = 0; i < tokens.length; i++) {
+                allTokens.push(tokens[i]); // do not use concat, we do not want to have a new "allTokens" in memory
+            }
+            return true;
+        }
+
+        return false;
+    }
+
+    _checkInDirectionRec(tokens, symbol, columnIndex, rowIndex, dColumnIndex, dRowIndex, remainingLineLength, board) {
+        // out of bounds
+        columnIndex += dColumnIndex;
+        rowIndex += dRowIndex;
+
+        // if game boundary is reached
+        if (columnIndex < 0 || columnIndex >= this.props.config.cols
+            || rowIndex < 0 || rowIndex >= this.props.config.rows)
+            return 0;
+
+        // no match (end of the line):
+        if (symbol != board[rowIndex][columnIndex])
+            return 0;
+
+        tokens.push({ columnIndex:columnIndex, rowIndex:rowIndex });
+
+        // matching, but line is long enough
+        if (remainingLineLength <= 0)
+            return 1;
+
+        // matching, continue:
+        return 1 + this._checkInDirectionRec(tokens, symbol, columnIndex, rowIndex,
+            dColumnIndex, dRowIndex, remainingLineLength - 1, board);
+
+    }
+
+
 
   getTokenRow(board, col) {
     let row = board.length - 1;
@@ -79,7 +159,7 @@ export default class Connect4Game extends React.Component {
     return (
       <div className="connect4__game">
 
-        <Connect4Board state={this.state.state} 
+        <Connect4Board gameRunning={this.state.game_state == '_RUNNING'} 
             onInsertToken={this.insertToken.bind(this)}
             board={this.state.board} 
             config={this.props.config}/>

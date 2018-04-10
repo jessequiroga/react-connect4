@@ -53,11 +53,11 @@ export default function Connect4Setting({onGameStart, onSave, config}) {
           <div className="flex">
             <label className="label">Length:</label>
             <input className="input"
-                name="length"
+                name="lineLength"
                 onChange={changeNumber}
                 onBlur={validate}
                 type="number"
-                value={config.length}
+                value={config.lineLength}
             />
           </div>
         </div>
@@ -102,7 +102,7 @@ export default function Connect4Setting({onGameStart, onSave, config}) {
 Connect4Setting.propTypes = {
   config: PropTypes.shape({
     cols: PropTypes.number.isRequired,
-    length: PropTypes.number.isRequired,
+    lineLength: PropTypes.number.isRequired,
     rows: PropTypes.number.isRequired,
     player1: PropTypes.string.isRequired,
     player2: PropTypes.string.isRequired

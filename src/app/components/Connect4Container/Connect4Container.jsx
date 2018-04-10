@@ -8,7 +8,7 @@ export default class Connect4Container extends React.Component {
     super();
     this.state = {
       config: {
-        length: 4,
+        lineLength: 4,
         cols: 7,
         rows: 6,
         player1: 'Player 1',
