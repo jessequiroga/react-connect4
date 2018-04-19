@@ -5,16 +5,15 @@ import Status from '../Status/Status.jsx';
 import './Game.scss'
 
 export default class Game extends React.Component {
-
-  initBoard(cols, rows) {
-    const board = [];
-    for (let i = 0; i < cols; i++) {
-      board[i] = [];
-      for (let j = 0; j < rows; j++) {
-        board[i][j] = null;
-      }
-    }
-    return board;
+  constructor(props){
+    super(props);
+    const board = this.initBoard(this.props.config.rows, this.props.config.cols);
+    this.state = {
+      showInstructions: false,
+      board,
+      currPlayer: 1,
+      game_state: "_RUNNING"
+    };
   }
 
   restart(){
@@ -27,40 +26,85 @@ export default class Game extends React.Component {
     });
   }
 
+  toggleInstructions() {
+    this.setState({
+      showInstructions: !this.state.showInstructions
+    });
+  }
+
+  /*    BOARD   */
+  initBoard(cols, rows) {
+    const board = [];
+    for (let i = 0; i < cols; i++) {
+      board[i] = [];
+      for (let j = 0; j < rows; j++) {
+        board[i][j] = null;
+      }
+    }
+    return board;
+  }
+
+  getAvailableToken(col) {
+    let row = this.state.board.length - 1;
+    while(this.state.board[row][col]) {
+      row--;
+    }
+    return row;
+  }
+
   currentPlayerName(){
     if(this.state.currPlayer == 1)
       return this.props.config.player1;
     return this.props.config.player2;
   }
 
+  switchPlayer(){
+    this.setState({
+      currPlayer: 3-this.state.currPlayer
+    });
+  }
+
+  markWinnerToken(board, isConnect4){
+    for (var i = 0; i < isConnect4.length; i++) {
+      var token = isConnect4[i];
+      board[token.rowIndex][token.columnIndex] = -board[token.rowIndex][token.columnIndex]; //mark this as winnerToken
+    }
+    return board
+  }
+
+
   insertToken(col){
     let player = this.state.currPlayer;
     let game_state = "_RUNNING";
-    let board = this.cloneBoard(this.state.board);
-    const row = this.getTokenRow(board, col);
+    let board = this.state.board;
+    let row = this.getAvailableToken(col);
     board[row][col] = player
 
     let isConnect4 = this.checkMatch(player, col, row, board);
-    if (!isConnect4) {
-      player = 3-this.state.currPlayer
-    } else{
-      for (var i = 0; i < isConnect4.length; i++) {
-        var token = isConnect4[i];
-        board[token.rowIndex][token.columnIndex] = -board[token.rowIndex][token.columnIndex];
-      }
+    let isFieldFull = this.checkFieldFull(board);
+    if(isConnect4){
+      board = this.markWinnerToken(board, isConnect4);
       game_state = '_GAMEOVER'
+    } else if(isFieldFull){
+      game_state = '_FIELDFULL'
     }
+    else {
+      this.switchPlayer();
+    } 
 
     this.setState({
-      currPlayer: player,
       game_state: game_state,
       board: board
     });
   }
 
+  checkFieldFull(board){
+    return board.every(elem => !elem.includes(null)); 
+  }
+
   checkMatch(player, colIndex, rowIndex, board){
     let gameOver = false;
-    var winningTokens = [];
+    let winningTokens = [];
     gameOver |= this._checkInDirection(winningTokens, player, colIndex, rowIndex, 1, 0, "horizontal", board);
     gameOver |= this._checkInDirection(winningTokens, player, colIndex, rowIndex, 0, 1, "vertical", board);
     gameOver |= this._checkInDirection(winningTokens, player, colIndex, rowIndex, 1, 1, "upwards", board);
@@ -126,35 +170,6 @@ export default class Game extends React.Component {
     }
 
 
-
-  getTokenRow(board, col) {
-    let row = board.length - 1;
-    while(board[row][col]) {
-      row--;
-    }
-    return row;
-  }
-
-  cloneBoard(board) {
-    return board.map(row => [...row]);
-  }
-
-  componentWillMount() {
-    const board = this.initBoard(this.props.config.rows, this.props.config.cols);
-    this.setState({
-      showInstructions: false,
-      board,
-      currPlayer: 1,
-      game_state: "_RUNNING"
-    });
-  }
-
-  toggleInstructions() {
-    this.setState({
-      showInstructions: !this.state.showInstructions
-    });
-  }
-
   render() {
     return (
       <div className="component__game">
@@ -162,7 +177,7 @@ export default class Game extends React.Component {
         <Board gameRunning={this.state.game_state == '_RUNNING'} 
             onInsertToken={this.insertToken.bind(this)}
             board={this.state.board} 
-            config={this.props.config}/>
+            currPlayer={this.state.currPlayer}/>
 
 
         <div className="component__status">
@@ -173,6 +188,11 @@ export default class Game extends React.Component {
           {this.state.game_state === '_GAMEOVER' && (
             <Status message="Winner is: " currPlayer={this.currentPlayerName.bind(this)()}/>
           )}
+
+          {this.state.game_state === '_FIELDFULL' && (
+            <Status message="Field is full! " currPlayer="No Winner"/>
+          )}
+          
         </div>
 
         <div className="btn__container">

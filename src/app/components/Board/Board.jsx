@@ -19,7 +19,7 @@ export default class Connect4Board extends React.Component {
         
         <div className="cellContainer" key={colIndex} id={colIndex}>
           {this.props.gameRunning && !col  && 
-          <Connect4InputCell col={colIndex} onInsertToken={this.props.onInsertToken} />
+          <Connect4InputCell col={colIndex} currPlayer={this.props.currPlayer} onInsertToken={this.props.onInsertToken} />
           }
         </div>
         
