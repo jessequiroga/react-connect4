@@ -1,0 +1,33 @@
+.component__settings{
+	.players{
+		padding-bottom: 20px;
+	  border-bottom: 1px solid #ededed;
+
+	  .input{
+			padding: 4px;
+			margin-top: 15px;
+			text-align: center;
+		}
+	}
+
+	.label{
+		width: 100px;
+		margin: 3px;
+	}
+
+	.gameboard{
+		margin: 40px 0px;
+		h2{
+			font-weight: bold;
+		}
+		.input{
+			padding: 4px;
+			width: 40px;
+		}
+		.flex{
+			width: 150px;
+			margin: auto;
+		}
+	}
+
+}

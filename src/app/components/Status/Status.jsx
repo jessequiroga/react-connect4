@@ -1,7 +1,7 @@
 import React from 'react';
-import './Connect4Message.scss'
+import './Status.scss'
 
-export default class Connect4Message extends React.Component {
+export default class Status extends React.Component {
 
 	render() {
     return (

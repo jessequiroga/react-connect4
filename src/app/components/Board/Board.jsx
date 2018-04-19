@@ -1,11 +1,8 @@
 import React from 'react';
-import './Connect4Board.scss'
-
-
-import Connect4Token from '../Connect4Token/Connect4Token.jsx';
-import Connect4Cell from '../Connect4Cell/Connect4Cell.jsx';
-import Connect4InputCell from '../Connect4Cell/Connect4InputCell.jsx';
-
+import Token from '../Token/Token.jsx';
+import Connect4Cell from '../BoardCell/BoardCell.jsx';
+import Connect4InputCell from '../BoardCell/InputCell.jsx';
+import './Board.scss'
 
 export default class Connect4Board extends React.Component {
   constructor() {
@@ -17,13 +14,12 @@ export default class Connect4Board extends React.Component {
   render() {
     let board = this.props.board;
 
-
     let rowInput = board[0].map((col, colIndex) => {
       return (
         
         <div className="cellContainer" key={colIndex} id={colIndex}>
-          {!col && 
-          <Connect4InputCell col={colIndex} onInsertToken={this.props.onInsertToken} />
+          {this.props.gameRunning && !col  && 
+          <Connect4InputCell col={colIndex} currPlayer={this.props.currPlayer} onInsertToken={this.props.onInsertToken} />
           }
         </div>
         
@@ -36,12 +32,14 @@ export default class Connect4Board extends React.Component {
           {row.map((cellValue, colIndex) => {
              return (
               <div className="cellContainer" key={colIndex} id={`${rowIndex}-${colIndex}`} >
-                <Connect4Cell col={colIndex} row={rowIndex} />
+              
+                <Connect4Cell col={colIndex} row={rowIndex} win={cellValue < 0} />
                 
-                {cellValue &&
-                  <Connect4Token player={cellValue} col={colIndex} key={`${rowIndex}-${colIndex}`}
+                {(cellValue != null) &&
+                  <Token player={cellValue} col={colIndex} key={`${rowIndex}-${colIndex}`}
                   row={rowIndex} />
                 }
+
               </div>
             )
 
@@ -52,7 +50,6 @@ export default class Connect4Board extends React.Component {
           
     return (
       <div className="connect4__board">
-
         <div className="gameboard">
           <div className="row input">
             {rowInput}
@@ -62,6 +59,7 @@ export default class Connect4Board extends React.Component {
           </div>
         </div>
         <br/>
+        
       </div>
     );
   }

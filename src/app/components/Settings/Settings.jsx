@@ -1,16 +1,16 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import './Connect4Setting.scss'
+import './Settings.scss'
 
-export default function Connect4Setting({onGameStart, onSave, config}) {
+export default function Setting({onGameStart, onSave, config}) {
 
     return (
-      <div className="connect4__setting">
+      <div className="component__settings">
         <div className="players">
           <div className="flex">
-              <label className="label_player player1"></label>
-              <label className="label_player player2"> </label>
+              <label className="labelPlayer player1"></label>
+              <label className="labelPlayer player2"> </label>
           </div>
           <div className="flex">
             <input className="input"
@@ -53,11 +53,11 @@ export default function Connect4Setting({onGameStart, onSave, config}) {
           <div className="flex">
             <label className="label">Length:</label>
             <input className="input"
-                name="length"
+                name="lineLength"
                 onChange={changeNumber}
                 onBlur={validate}
                 type="number"
-                value={config.length}
+                value={config.lineLength}
             />
           </div>
         </div>
@@ -99,10 +99,10 @@ export default function Connect4Setting({onGameStart, onSave, config}) {
 }
 
 
-Connect4Setting.propTypes = {
+Setting.propTypes = {
   config: PropTypes.shape({
     cols: PropTypes.number.isRequired,
-    length: PropTypes.number.isRequired,
+    lineLength: PropTypes.number.isRequired,
     rows: PropTypes.number.isRequired,
     player1: PropTypes.string.isRequired,
     player2: PropTypes.string.isRequired
@@ -111,4 +111,4 @@ Connect4Setting.propTypes = {
   onGameStart: PropTypes.func.isRequired
 };
 
-Connect4Setting.defaultProps = {};
+Setting.defaultProps = {};

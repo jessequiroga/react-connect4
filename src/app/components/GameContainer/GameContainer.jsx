@@ -1,14 +1,14 @@
 import React from 'react';
-import Connect4Game from '../Connect4Game/Connect4Game.jsx';
-import Connect4Setting from '../Connect4Setting/Connect4Setting.jsx';
-import './Connect4Container.scss'
+import Game from '../Game/Game.jsx';
+import Settings from '../Settings/Settings.jsx';
+import './GameContainer.scss'
 
-export default class Connect4Container extends React.Component {
+export default class GameContainer extends React.Component {
   constructor() {
     super();
     this.state = {
       config: {
-        length: 4,
+        lineLength: 4,
         cols: 7,
         rows: 6,
         player1: 'Player 1',
@@ -24,8 +24,6 @@ export default class Connect4Container extends React.Component {
     this.setState({
       config: config
     });
-
-    console.log(this.state.config);
   };
 
   setGameStart() {
@@ -42,12 +40,12 @@ export default class Connect4Container extends React.Component {
 
   render() {
     return (
-      <div className="connect4__container">
+      <div className="component__gamecontainer">
         <h1>Connect Four</h1>
          
         {this.state.gameStart ?   
-          <Connect4Game config={this.state.config} onGameStop={this.setGameStop.bind(this)}/> : 
-          <Connect4Setting 
+          <Game config={this.state.config} onGameStop={this.setGameStop.bind(this)}/> : 
+          <Settings
             onGameStart={this.setGameStart.bind(this)}
             onSave={this.setConfig.bind(this)}
             config={this.state.config}/> 
