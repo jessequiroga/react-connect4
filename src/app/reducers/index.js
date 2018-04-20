@@ -1,6 +1,12 @@
 import { combineReducers } from 'redux'
-import introduction from './introduction'
+import BoardReducer from './board'
+import GameReducer from './game'
+import IntroductionReducer from './introduction'
 
-export default combineReducers({
-  introduction,
+const rootReducer = combineReducers({
+    board: BoardReducer,
+    game: GameReducer,
+    introduction: IntroductionReducer,
 })
+
+export default rootReducer

@@ -1,13 +1,12 @@
 import React from 'react';
-import GameContainer from './GameContainer/GameContainer.jsx'
+import GameWrapperContainer from './GameWrapper/GameWrapperContainer.js'
 
 export default class App extends React.Component {
-  render() {
-  	
-    return (
-    	<div className="component__app">
-    	  <GameContainer/>
-    	</div>
-     );
-  }
+    render() {
+        return (
+            <div className="component__app">
+                <GameWrapperContainer/>
+            </div>
+        );
+    }
 }

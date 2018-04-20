@@ -9,7 +9,6 @@ export default class Game extends React.Component {
     super(props);
     const board = this.initBoard(this.props.config.rows, this.props.config.cols);
     this.state = {
-      showInstructions: false,
       board,
       currPlayer: 1,
       game_state: "_RUNNING"
@@ -19,16 +18,9 @@ export default class Game extends React.Component {
   restart(){
     const board = this.initBoard(this.props.config.rows, this.props.config.cols);
     this.setState({
-      showInstructions: false,
       board,
       currPlayer: 1,
       game_state: "_RUNNING"
-    });
-  }
-
-  toggleInstructions() {
-    this.setState({
-      showInstructions: !this.state.showInstructions
     });
   }
 
@@ -90,7 +82,7 @@ export default class Game extends React.Component {
     }
     else {
       this.switchPlayer();
-    } 
+    }
 
     this.setState({
       game_state: game_state,
@@ -99,7 +91,7 @@ export default class Game extends React.Component {
   }
 
   checkFieldFull(board){
-    return board.every(elem => !elem.includes(null)); 
+    return board.every(elem => !elem.includes(null));
   }
 
   checkMatch(player, colIndex, rowIndex, board){
@@ -169,48 +161,50 @@ export default class Game extends React.Component {
 
     }
 
-
   render() {
+    const { showIntroduction, toggleIntroduction } = this.props
     return (
       <div className="component__game">
 
-        <Board gameRunning={this.state.game_state == '_RUNNING'} 
-            onInsertToken={this.insertToken.bind(this)}
-            board={this.state.board} 
-            currPlayer={this.state.currPlayer}/>
+        <Board gameRunning={ this.state.game_state == '_RUNNING' }
+            onInsertToken={ this.insertToken.bind(this) }
+            board={ this.state.board }
+            currPlayer={ this.state.currPlayer }/>
 
 
         <div className="component__status">
           {this.state.game_state === '_RUNNING' && (
-            <Status message="Current Player: " currPlayer={this.currentPlayerName.bind(this)()}/>
+            <Status message="Current Player: " currPlayer={ this.currentPlayerName.bind(this)() }/>
           )}
 
           {this.state.game_state === '_GAMEOVER' && (
-            <Status message="Winner is: " currPlayer={this.currentPlayerName.bind(this)()}/>
+            <Status message="Winner is: " currPlayer={ this.currentPlayerName.bind(this)() }/>
           )}
 
           {this.state.game_state === '_FIELDFULL' && (
             <Status message="Field is full! " currPlayer="No Winner"/>
           )}
-          
+
         </div>
 
         <div className="btn__container">
-          <button className="btn__primary btn__small" onClick={this.props.onGameStop}>
+          <button className="btn__primary btn__small" onClick={ this.props.onGameStop }>
             <i className="fa fa-cogs fa-lg" aria-hidden="true"></i>
           </button>
-          <button className="btn__primary btn__medium" onClick={this.restart.bind(this)}>
+          <button className="btn__primary btn__medium" onClick={ this.restart.bind(this) }>
             Restart <i className="fa fa-refresh" aria-hidden="true"></i>
           </button>
-          <button className="btn__primary btn__small" onClick={this.toggleInstructions.bind(this)}>
+          <button className="btn__primary btn__small" onClick={ toggleIntroduction }>
             <i className="fa fa-info-circle fa-lg" aria-hidden="true"></i>
           </button>
         </div>
-        
-        {this.state.showInstructions ? 
-            <Introduction closePopup={this.toggleInstructions.bind(this)} /> : null
+
+        <p data-show={ showIntroduction }>show</p>
+
+        { showIntroduction ?
+            <Introduction closePopup={ toggleIntroduction } /> : null
         }
-        
+
       </div>);
   }
 }
