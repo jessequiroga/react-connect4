@@ -1,11 +1,11 @@
 # Connect 4 Game implemented in ReactJS (Webpack and Babel)
 
-Webpack - A module bundler__
-Babel - A Javascript compiler__
-ES6 - A relatively new Javascript standard__
-Yarn - A package manager__
-React - As expected__
-Redux - A state management tool__
+Webpack - A module bundler  
+Babel - A Javascript compiler  
+ES6 - A relatively new Javascript standard  
+Yarn - A package manager  
+React - As expected  
+Redux - A state management tool  
 
 ### Pre-requirements
 - brew & node & yarn
