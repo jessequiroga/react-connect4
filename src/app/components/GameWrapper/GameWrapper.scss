@@ -1,6 +1,7 @@
 @import "../../../style/header.scss";
 
-.component__gamewrapper{
+.component {
+  &__gamewrapper{
     position: absolute;
     width:auto;
     height: auto;
@@ -9,12 +10,13 @@
     text-align: center;
     background-color: #fff;
     box-shadow: 0 2px 6px rgba(100, 100, 100, 0.3);
+  }
 }
 
 #copyright{
-    color: $mainColor1;
-    position: absolute;
-    font-size: 10px;
-    right: 8px;
-    bottom: -30px;
+  color: $mainColor1;
+  position: absolute;
+  font-size: 10px;
+  right: 8px;
+  bottom: -30px;
 }

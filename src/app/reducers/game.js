@@ -1,7 +1,7 @@
 import {
   START_GAME,
   STOP_GAME,
-  SET_CURRENT_PLAYER,
+  SWITCH_PLAYER,
   SET_GAME_STATUS
 } from '../constants/ActionTypes'
 
@@ -23,7 +23,7 @@ export default function game (state = initialState, action) {
       return Object.assign({}, game, {
         started: false
       })
-    case SET_CURRENT_PLAYER:
+    case SWITCH_PLAYER:
       return Object.assign({}, game, {
         started: true,
         status: 'running',

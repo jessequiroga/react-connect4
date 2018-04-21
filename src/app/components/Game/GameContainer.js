@@ -1,9 +1,14 @@
 import { connect } from 'react-redux'
-import { toggleIntroduction, setCurrentPlayer, setGameStatus, initBoard, insertToken } from '../../actions'
+import {
+  toggleIntroduction,
+  switchPlayer,
+  setGameStatus,
+  initBoard,
+  updateBoard
+} from '../../actions'
 import Game from './Game.jsx'
 
 const mapStateToProps = (state) => {
-  console.log(state)
   return {
     board: state.board.board,
     ready: state.board.ready,
@@ -20,10 +25,10 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => ({
   toggleIntroduction: () => dispatch(toggleIntroduction()),
-  setCurrentPlayer: (num) => dispatch(setCurrentPlayer(num)),
+  switchPlayer: (player) => dispatch(switchPlayer(player)),
   setGameStatus: (status) => dispatch(setGameStatus(status)),
   initBoard: (board) => dispatch(initBoard(board)),
-  insertToken: (board) => dispatch(insertToken(board))
+  updateBoard: (board) => dispatch(updateBoard(board))
 })
 
 export default connect(

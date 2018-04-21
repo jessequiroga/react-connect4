@@ -1,5 +1,8 @@
 import { connect } from 'react-redux'
-import { startGame, stopGame } from '../../actions'
+import {
+  startGame,
+  stopGame
+} from '../../actions'
 import GameWrapper from './GameWrapper.jsx'
 
 const mapStateToProps = (state) => {

@@ -1,5 +1,11 @@
 import { connect } from 'react-redux'
-import { setPlayer1, setPlayer2, setColNum, setRowNum, setLineLength } from '../../actions'
+import {
+  setPlayer1,
+  setPlayer2,
+  setColNum,
+  setRowNum,
+  setLineLength
+} from '../../actions'
 import Settings from './Settings.jsx'
 
 const mapStateToProps = (state) => {

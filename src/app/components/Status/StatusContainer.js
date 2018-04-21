@@ -1,14 +1,15 @@
 import { connect } from 'react-redux'
-import Board from './Board.jsx'
+import Status from './Status.jsx'
 
 const mapStateToProps = (state) => {
   return {
-    board: state.board.board,
-    gameStatus: state.game.status,
+    player1: state.settings.player1,
+    player2: state.settings.player2,
     currPlayer: state.game.currPlayer,
+    status: state.game.status
   }
 }
 
 export default connect(
   mapStateToProps
-)(Board)
+)(Status)

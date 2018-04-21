@@ -5,10 +5,10 @@ import GameReducer from './game'
 import IntroductionReducer from './introduction'
 
 const rootReducer = combineReducers({
-    board: BoardReducer,
-    game: GameReducer,
-    introduction: IntroductionReducer,
-    settings: SettingsReducer
+  board: BoardReducer,
+  game: GameReducer,
+  introduction: IntroductionReducer,
+  settings: SettingsReducer
 })
 
 export default rootReducer
