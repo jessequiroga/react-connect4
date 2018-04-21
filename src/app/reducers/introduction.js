@@ -1,9 +1,9 @@
 import {
   TOGGLE_INTRODUCTION,
-} from '../actions/index.js'
+} from '../constants/ActionTypes'
 
 const initialState = {
-    show: false,
+    show: false
 }
 
 export default function introduction (state = initialState, action) {

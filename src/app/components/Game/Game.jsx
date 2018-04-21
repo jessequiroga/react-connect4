@@ -1,59 +1,42 @@
 import React from 'react';
 import Introduction from '../Introduction/Introduction.jsx';
-import Board from '../Board/Board.jsx';
+import BoardContainer from '../Board/BoardContainer.js';
 import Status from '../Status/Status.jsx';
 import './Game.scss'
 
 export default class Game extends React.Component {
   constructor(props){
-    super(props);
-    const board = this.initBoard(this.props.config.rows, this.props.config.cols);
-    this.state = {
-      board,
-      currPlayer: 1,
-      game_state: "_RUNNING"
-    };
+    super(props)
+    this.initBoard()
   }
 
   restart(){
-    const board = this.initBoard(this.props.config.rows, this.props.config.cols);
-    this.setState({
-      board,
-      currPlayer: 1,
-      game_state: "_RUNNING"
-    });
+    this.initBoard()
+    this.props.setGameStatus('running')
   }
 
-  /*    BOARD   */
-  initBoard(cols, rows) {
-    const board = [];
-    for (let i = 0; i < cols; i++) {
+  initBoard() {
+    let board = [];
+    for (let i = 0; i < this.props.rowNum; i++) {
       board[i] = [];
-      for (let j = 0; j < rows; j++) {
+      for (let j = 0; j < this.props.colNum; j++) {
         board[i][j] = null;
       }
     }
-    return board;
+    this.props.initBoard(board)
   }
 
   getAvailableToken(col) {
-    let row = this.state.board.length - 1;
-    while(this.state.board[row][col]) {
+    let row = this.props.board.length - 1;
+    while(this.props.board[row][col]) {
       row--;
     }
     return row;
   }
 
   currentPlayerName(){
-    if(this.state.currPlayer == 1)
-      return this.props.config.player1;
-    return this.props.config.player2;
-  }
-
-  switchPlayer(){
-    this.setState({
-      currPlayer: 3-this.state.currPlayer
-    });
+    if(this.props.currPlayer == 1) return this.props.player1;
+    else return this.props.player2;
   }
 
   markWinnerToken(board, isConnect4){
@@ -66,41 +49,40 @@ export default class Game extends React.Component {
 
 
   insertToken(col){
-    let player = this.state.currPlayer;
-    let game_state = "_RUNNING";
-    let board = this.state.board;
+    // let player = this.props.currPlayer;
+    this.props.setGameStatus('running')
+    let board = this.props.board;
     let row = this.getAvailableToken(col);
-    board[row][col] = player
+    // this.props.insertToken(row, col, player)
+    // console.log(this.props)
+    board[row][col] = this.props.currPlayer
+    this.props.insertToken(board)
 
-    let isConnect4 = this.checkMatch(player, col, row, board);
-    let isFieldFull = this.checkFieldFull(board);
+    let isConnect4 = this.checkMatch(col, row);
+    let isFieldFull = this.checkFieldFull();
     if(isConnect4){
       board = this.markWinnerToken(board, isConnect4);
-      game_state = '_GAMEOVER'
-    } else if(isFieldFull){
-      game_state = '_FIELDFULL'
+      this.props.setGameStatus('gameover')
+    }
+    else if(isFieldFull){
+      this.props.setGameStatus('fieldfull')
     }
     else {
-      this.switchPlayer();
+      this.props.setCurrentPlayer(this.props.currPlayer)
     }
-
-    this.setState({
-      game_state: game_state,
-      board: board
-    });
   }
 
-  checkFieldFull(board){
-    return board.every(elem => !elem.includes(null));
+  checkFieldFull(){
+    return this.props.board.every(elem => !elem.includes(null));
   }
 
-  checkMatch(player, colIndex, rowIndex, board){
+  checkMatch(colIndex, rowIndex){
     let gameOver = false;
     let winningTokens = [];
-    gameOver |= this._checkInDirection(winningTokens, player, colIndex, rowIndex, 1, 0, "horizontal", board);
-    gameOver |= this._checkInDirection(winningTokens, player, colIndex, rowIndex, 0, 1, "vertical", board);
-    gameOver |= this._checkInDirection(winningTokens, player, colIndex, rowIndex, 1, 1, "upwards", board);
-    gameOver |= this._checkInDirection(winningTokens, player, colIndex, rowIndex, -1, 1, "downwards", board);
+    gameOver |= this._checkInDirection(winningTokens, colIndex, rowIndex, 1, 0, "horizontal");
+    gameOver |= this._checkInDirection(winningTokens, colIndex, rowIndex, 0, 1, "vertical");
+    gameOver |= this._checkInDirection(winningTokens, colIndex, rowIndex, 1, 1, "upwards");
+    gameOver |= this._checkInDirection(winningTokens, colIndex, rowIndex, -1, 1, "downwards");
 
     if (gameOver) {
       return winningTokens;
@@ -108,21 +90,21 @@ export default class Game extends React.Component {
     return false;
   }
 
-  _checkInDirection(allTokens, symbol, columnIndex, rowIndex, dColumnIndex, dRowIndex, directionLabel, board) {
-        var maxLineLength = this.props.config.lineLength;
+  _checkInDirection(allTokens, columnIndex, rowIndex, dColumnIndex, dRowIndex, directionLabel) {
+        var maxLineLength = this.props.lineLength;
         var tokens = [
             { columnIndex:columnIndex, rowIndex:rowIndex }
         ];
 
         // check the one direction
-        var lineLength = this._checkInDirectionRec(tokens, symbol, columnIndex, rowIndex,
-            dColumnIndex, dRowIndex, maxLineLength - 2, board);
+        var lineLength = this._checkInDirectionRec(tokens, columnIndex, rowIndex,
+            dColumnIndex, dRowIndex, maxLineLength - 2);
         // subtract 1 for the "own" token, minus one for the recursion
 
 
         //add 1 for own token, substract 2 for "own" token, minus one for recursion
-        lineLength += 1 + this._checkInDirectionRec(tokens, symbol, columnIndex, rowIndex,
-            -dColumnIndex, -dRowIndex, maxLineLength - 2 - lineLength, board);
+        lineLength += 1 + this._checkInDirectionRec(tokens, columnIndex, rowIndex,
+            -dColumnIndex, -dRowIndex, maxLineLength - 2 - lineLength);
 
         // if a line is found, copy its tokens to the referenced array
         if (lineLength >= maxLineLength) {
@@ -135,19 +117,18 @@ export default class Game extends React.Component {
         return false;
     }
 
-    _checkInDirectionRec(tokens, symbol, columnIndex, rowIndex, dColumnIndex, dRowIndex, remainingLineLength, board) {
+    _checkInDirectionRec(tokens, columnIndex, rowIndex, dColumnIndex, dRowIndex, remainingLineLength) {
         // out of bounds
         columnIndex += dColumnIndex;
         rowIndex += dRowIndex;
 
         // if game boundary is reached
-        if (columnIndex < 0 || columnIndex >= this.props.config.cols
-            || rowIndex < 0 || rowIndex >= this.props.config.rows)
+        if (columnIndex < 0 || columnIndex >= this.props.colNum
+            || rowIndex < 0 || rowIndex >= this.props.rowNum)
             return 0;
 
         // no match (end of the line):
-        if (symbol != board[rowIndex][columnIndex])
-            return 0;
+        if (this.props.currPlayer != this.props.board[rowIndex][columnIndex]) return 0
 
         tokens.push({ columnIndex:columnIndex, rowIndex:rowIndex });
 
@@ -156,55 +137,58 @@ export default class Game extends React.Component {
             return 1;
 
         // matching, continue:
-        return 1 + this._checkInDirectionRec(tokens, symbol, columnIndex, rowIndex,
-            dColumnIndex, dRowIndex, remainingLineLength - 1, board);
+        return 1 + this._checkInDirectionRec(tokens, columnIndex, rowIndex,
+            dColumnIndex, dRowIndex, remainingLineLength - 1);
 
     }
 
   render() {
-    const { showIntroduction, toggleIntroduction } = this.props
-    return (
-      <div className="component__game">
-
-        <Board gameRunning={ this.state.game_state == '_RUNNING' }
+    console.log(this.props)
+    if(this.props.ready) {
+      return (
+        <div className="component__game">
+          <BoardContainer
             onInsertToken={ this.insertToken.bind(this) }
-            board={ this.state.board }
-            currPlayer={ this.state.currPlayer }/>
+            board={ this.props.board }
+            currPlayer={ this.props.currPlayer }
+            />
 
+          <div className="component__status">
+            { this.props.gameStatus === 'running' && (
+              <Status message="Current Player: " currPlayer={ this.currentPlayerName.bind(this)() }/>
+            )}
 
-        <div className="component__status">
-          {this.state.game_state === '_RUNNING' && (
-            <Status message="Current Player: " currPlayer={ this.currentPlayerName.bind(this)() }/>
-          )}
+            { this.props.gameStatus === 'gameover' && (
+              <Status message="Winner is: " currPlayer={ this.currentPlayerName.bind(this)() }/>
+            )}
 
-          {this.state.game_state === '_GAMEOVER' && (
-            <Status message="Winner is: " currPlayer={ this.currentPlayerName.bind(this)() }/>
-          )}
+            { this.props.gameStatus === 'fieldfull' && (
+              <Status message="Field is full! " currPlayer="No Winner"/>
+            )}
 
-          {this.state.game_state === '_FIELDFULL' && (
-            <Status message="Field is full! " currPlayer="No Winner"/>
-          )}
+          </div>
 
-        </div>
-
-        <div className="btn__container">
-          <button className="btn__primary btn__small" onClick={ this.props.onGameStop }>
-            <i className="fa fa-cogs fa-lg" aria-hidden="true"></i>
+          <div className="btn__container">
+            <button className="btn__primary btn__small" onClick={ this.props.onGameStop }>
+              <i className="fa fa-cogs fa-lg" aria-hidden="true"></i>
+            </button>
+            <button className="btn__primary btn__medium" onClick={ this.restart.bind(this) }>
+              Restart <i className="fa fa-refresh" aria-hidden="true"></i>
           </button>
-          <button className="btn__primary btn__medium" onClick={ this.restart.bind(this) }>
-            Restart <i className="fa fa-refresh" aria-hidden="true"></i>
-          </button>
-          <button className="btn__primary btn__small" onClick={ toggleIntroduction }>
+          <button className="btn__primary btn__small" onClick={ this.props.toggleIntroduction }>
             <i className="fa fa-info-circle fa-lg" aria-hidden="true"></i>
           </button>
         </div>
 
-        <p data-show={ showIntroduction }>show</p>
+        { this.props.showIntroduction ?
+          <Introduction closePopup={ this.props.toggleIntroduction } /> : null
+          }
 
-        { showIntroduction ?
-            <Introduction closePopup={ toggleIntroduction } /> : null
-        }
-
-      </div>);
+        </div>
+      )
+    }
+    else {
+      return(<div>Loading...</div>)
+    }
   }
 }
