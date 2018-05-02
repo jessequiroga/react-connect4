@@ -3,14 +3,21 @@ import PropTypes from 'prop-types'
 import './Settings.scss'
 
 export default function Settings({ onGameStart,
-  player1, player2, colNum, rowNum, lineLength,
-  setPlayer1, setPlayer2, setColNum, setRowNum, setLineLength })
+  player1, player2, colNum, rowNum, lineLength, countdown,
+  setPlayer1, setPlayer2, setColNum, setRowNum, setLineLength, setCountdown })
 {
   function validateNum(e){
     let value = e.target.value
 
     if(value < 4) return 4
     else if(value > 25) return 25
+    else return value
+  }
+  function validateTime(e){
+    let value = e.target.value
+
+    if(value < 0) return 0.5
+    else if(value > 10) return 10
     else return value
   }
   function validateString(value, num){
@@ -23,6 +30,7 @@ export default function Settings({ onGameStart,
   function _setColNum(e) { setColNum(validateNum(e)) }
   function _setRowNum(e) { setRowNum(validateNum(e)) }
   function _setLineLength(e) { setLineLength(validateNum(e)) }
+  function _setCountdown(e) { setCountdown(validateTime(e)) }
 
   function handleClick(e) {
     setPlayer1(validateString(player1, 1))
@@ -81,6 +89,16 @@ export default function Settings({ onGameStart,
               onChange={ _setLineLength.bind(this) }
               type="number"
               value={ lineLength }
+          />
+        </div>
+        <div className="flex">
+          <label className="label">Time (min):</label>
+          <input className="input"
+              name="countdown"
+              onChange={ _setCountdown.bind(this) }
+              type="number"
+              step=".5"
+              value={ countdown }
           />
         </div>
       </div>
