@@ -20,3 +20,6 @@ Redux - A state management tool
 3. run `yarn install`
 4. run `yarn start`
 5. now the game is available on `localhost:4444`
+
+
+### created by Christina Grafeneder (S1710629009) and Christa Höglinger (S1710629010)
