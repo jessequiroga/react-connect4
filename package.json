@@ -32,6 +32,8 @@
     "css-loader": "^0.28.11",
     "dotenv": "^5.0.1",
     "node-sass": "^4.8.3",
+    "react-redux": "^5.0.7",
+    "redux": "^4.0.0",
     "sass-loader": "^6.0.7",
     "style-loader": "^0.20.3",
     "uglifyjs-webpack-plugin": "^1.2.4",
