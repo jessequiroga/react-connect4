@@ -7,17 +7,16 @@ export default class CountdownWrapper extends React.Component {
     super(props)
   }
 
-  componentDidUpdate() {
-    console.log(this.props)
+  renderer ({ hours, minutes, seconds, completed }) {
+    let rowInputs = document.getElementsByClassName('row input')
 
-  }
-
-  updateCountdown(minutes) {
-    console.log(minutes)
-  }
-
-  countdownRenderer({ hours, minutes, seconds, completed }) {
     if (completed) {
+      for(let i=0; i < rowInputs.length; i++) {
+        rowInputs[i].childNodes.forEach(function (node) {
+          node.childNodes[0].style.display = 'none'
+        })
+      }
+
       return <Completionist />
     }
     else {
@@ -25,22 +24,12 @@ export default class CountdownWrapper extends React.Component {
     }
   }
 
-  myCallback() {
-    console.log('sdf')
-  }
-
   render() {
     return (
-      // <Countdown
-      //   date = { Date.now() + this.props.countdown * 1000 }
-      //   renderer = { this.countdownRenderer }
-      //   onBlur = { this.updateCountdown(10) }
-      // />
-      <ReactCountdownClock seconds={60}
-                     color="#000"
-                     alpha={0.9}
-                     size={300}
-                     onComplete={this.myCallback} />
+      <Countdown
+        date = { Date.now() + this.props.countdown * 1000 * 60 }
+        renderer = { this.renderer }
+      />
     )
   }
 }

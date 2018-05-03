@@ -9,7 +9,6 @@ export default class GameWrapper extends React.Component {
     return (
       <div className="component__gamewrapper">
         <h1>Connect Four</h1>
-        { console.log(gameStarted) }
         { gameStarted ?
           <GameContainer onGameStart={ startGame } onGameStop={ stopGame } /> :
           <SettingsContainer onGameStart={ startGame } />

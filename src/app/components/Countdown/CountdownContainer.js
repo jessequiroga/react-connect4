@@ -11,7 +11,7 @@ const mapStateToProps = (state) => {
 }
 
 const mapDispatchToProps = (dispatch) => ({
-  setCountdown: (num) => dispatch(setCountdown(num))
+  setGameStatus: (status) => dispatch(setGameStatus(status)),
 })
 
 export default connect(
