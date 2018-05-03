@@ -2,6 +2,7 @@ import React from 'react'
 import Introduction from '../Introduction/Introduction.jsx'
 import BoardContainer from '../Board/BoardContainer.js'
 import StatusContainer from '../Status/StatusContainer.js'
+import CountdownContainer from '../Countdown/CountdownContainer.js'
 
 export default class Game extends React.Component {
   constructor(props){
@@ -10,9 +11,7 @@ export default class Game extends React.Component {
   }
 
   restart(){
-    this.initBoard()
-    this.props.switchPlayer(this.props.currPlayer)
-    this.props.setGameStatus('running')
+    this.props.onGameStop()
   }
 
   initBoard() {
@@ -124,6 +123,7 @@ export default class Game extends React.Component {
 
           <div className="component__status">
             <StatusContainer />
+            <CountdownContainer />
           </div>
 
           <div className="btn__container">

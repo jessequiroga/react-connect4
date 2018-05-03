@@ -4,7 +4,8 @@ import {
   switchPlayer,
   setGameStatus,
   initBoard,
-  updateBoard
+  updateBoard,
+  setCountdown
 } from '../../actions'
 import Game from './Game.jsx'
 
@@ -20,6 +21,7 @@ const mapStateToProps = (state) => {
     colNum: state.settings.colNum,
     rowNum: state.settings.rowNum,
     lineLength: state.settings.lineLength,
+    countdown: state.settings.countdown,
   }
 }
 
@@ -28,7 +30,8 @@ const mapDispatchToProps = (dispatch) => ({
   switchPlayer: (player) => dispatch(switchPlayer(player)),
   setGameStatus: (status) => dispatch(setGameStatus(status)),
   initBoard: (board) => dispatch(initBoard(board)),
-  updateBoard: (board) => dispatch(updateBoard(board))
+  updateBoard: (board) => dispatch(updateBoard(board)),
+  setCountdown: (num) => dispatch(setCountdown(num))
 })
 
 export default connect(
