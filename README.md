@@ -2,7 +2,7 @@
 
 Connect Four is a two-person strategy game with the goal of bringing the first four of his own pieces in a line.
 
-__Webpack__ - A module bundler (we use it also as task runner, so we didn't implement `grunt` or `gulp`)
+__Webpack__ - A module bundler (we use it also as task runner, so we didn't implement `grunt` or `gulp`)  
 __Babel__ - A Javascript compiler  
 __ES6__ - A relatively new Javascript standard  
 __Yarn__ - A package manager  
