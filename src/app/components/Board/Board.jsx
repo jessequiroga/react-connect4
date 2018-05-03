@@ -38,7 +38,7 @@ export default class Board extends React.Component {
     return (
       <div className="connect4__board">
         <div className="gameboard">
-          <div id="rowInput" className="row input">
+          <div className="row input">
             { rowInput }
           </div>
           <div className="playField">

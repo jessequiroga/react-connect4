@@ -1,6 +1,5 @@
 import React from 'react'
 import Countdown from 'react-countdown-now'
-import ReactCountdownClock from 'react-countdown-clock'
 
 export default class CountdownWrapper extends React.Component {
   constructor(props){
