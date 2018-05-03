@@ -35,8 +35,8 @@ export default function Settings({ onGameStart,
   function handleClick(e) {
     setPlayer1(validateString(player1, 1))
     setPlayer2(validateString(player2, 2))
-    e.preventDefault();
-    onGameStart();
+    e.preventDefault()
+    onGameStart()
   }
 
   return (

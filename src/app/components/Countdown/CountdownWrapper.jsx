@@ -1,13 +1,22 @@
 import React from 'react'
 import Countdown from 'react-countdown-now'
+import ReactCountdownClock from 'react-countdown-clock'
 
 export default class CountdownWrapper extends React.Component {
+  constructor(props){
+    super(props)
+  }
+
   componentDidUpdate() {
+    console.log(this.props)
 
   }
 
+  updateCountdown(minutes) {
+    console.log(minutes)
+  }
+
   countdownRenderer({ hours, minutes, seconds, completed }) {
-    console.log(seconds)
     if (completed) {
       return <Completionist />
     }
@@ -16,13 +25,22 @@ export default class CountdownWrapper extends React.Component {
     }
   }
 
+  myCallback() {
+    console.log('sdf')
+  }
+
   render() {
-    console.log(this.props)
     return (
-      <Countdown
-        date = { Date.now() + this.props.countdown * 1000 * 6 }
-        renderer = { this.countdownRenderer }
-      />
+      // <Countdown
+      //   date = { Date.now() + this.props.countdown * 1000 }
+      //   renderer = { this.countdownRenderer }
+      //   onBlur = { this.updateCountdown(10) }
+      // />
+      <ReactCountdownClock seconds={60}
+                     color="#000"
+                     alpha={0.9}
+                     size={300}
+                     onComplete={this.myCallback} />
     )
   }
 }

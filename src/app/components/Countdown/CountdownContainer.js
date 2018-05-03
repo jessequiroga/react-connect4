@@ -1,4 +1,7 @@
 import { connect } from 'react-redux'
+import {
+  setCountdown
+} from '../../actions'
 import CountdownWrapper from './CountdownWrapper.jsx'
 
 const mapStateToProps = (state) => {
@@ -7,6 +10,11 @@ const mapStateToProps = (state) => {
   }
 }
 
+const mapDispatchToProps = (dispatch) => ({
+  setCountdown: (num) => dispatch(setCountdown(num))
+})
+
 export default connect(
   mapStateToProps,
+  mapDispatchToProps
 )(CountdownWrapper)

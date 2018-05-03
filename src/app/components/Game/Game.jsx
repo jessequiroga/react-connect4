@@ -11,10 +11,12 @@ export default class Game extends React.Component {
   }
 
   restart(){
-    this.initBoard()
-    this.props.switchPlayer(this.props.currPlayer)
-    this.props.setGameStatus('running')
-    this.props.setCountdown(this.props.countdown + 0.5)
+    this.props.onGameStop()
+    // this.initBoard()
+    // this.props.switchPlayer(this.props.currPlayer)
+    // this.props.setGameStatus('running')
+    this.props.setCountdown(this.props.countdown +10)
+    this.props.onGameStart()
   }
 
   initBoard() {
