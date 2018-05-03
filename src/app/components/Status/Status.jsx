@@ -15,7 +15,7 @@ export default class Status extends React.Component {
 			player = 'No winner'
 		}
 		else if (this.props.status == 'running') {
-			message = 'Current player: '
+			message = 'Player on turn: '
 		}
 		else if (this.props.status == 'gameover') {
 			message = 'The winner is: '
@@ -23,7 +23,7 @@ export default class Status extends React.Component {
 
     return (
       <p className="player">
-      		{ message }
+      		{ message }<br/>
 					<span className="currPlayer">{ player }</span><br/>
       </p>
   	)

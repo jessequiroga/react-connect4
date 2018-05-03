@@ -34,6 +34,7 @@ export default function Settings({ onGameStart,
   return (
     <div className="component__settings">
       <div className="players">
+
         <div className="flex">
             <label className="labelPlayer player1"></label>
             <label className="labelPlayer player2"> </label>
