@@ -7,7 +7,7 @@ export default class GameWrapper extends React.Component {
   render() {
     const { gameStarted, startGame, stopGame } = this.props
     return (
-      <div className="component__gamewrapper">
+      <div className="component__gamewrapper container">
         <h1>Connect Four</h1>
         { gameStarted ?
           <GameContainer onGameStop={ stopGame } /> :
