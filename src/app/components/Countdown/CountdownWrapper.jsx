@@ -12,7 +12,7 @@ export default class CountdownWrapper extends React.Component {
     if (completed) {
       for(let i=0; i < rowInputs.length; i++) {
         rowInputs[i].childNodes.forEach(function (node) {
-          node.childNodes[0].style.display = 'none'
+          if(node.childNodes[0]) node.childNodes[0].style.display = 'none'
         })
       }
 
@@ -25,10 +25,12 @@ export default class CountdownWrapper extends React.Component {
 
   render() {
     return (
-      <Countdown
-        date = { Date.now() + this.props.countdown * 1000 * 60 }
-        renderer = { this.renderer }
-      />
+      <div className="countdown-wrapper">
+        <Countdown
+          date = { Date.now() + this.props.countdown * 1000 * 60 }
+          renderer = { this.renderer }
+        />
+      </div>
     )
   }
 }

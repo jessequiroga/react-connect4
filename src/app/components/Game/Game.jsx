@@ -54,10 +54,12 @@ export default class Game extends React.Component {
     let isFull = this.checkFieldFull()
 
     if(match){
+      document.getElementsByClassName('countdown-wrapper')[0].style.display = 'none'
       this.markWinnerToken(match);
       this.props.setGameStatus('gameover')
     }
     else if(isFull){
+      document.getElementsByClassName('countdown-wrapper')[0].style.display = 'none'
       this.props.setGameStatus('full')
     }
     else {
