@@ -15,10 +15,9 @@ __React__ - As expected
 
 ### To get started
 1. `cd` into your project directory
-2. run `bundle install`
-3. run `yarn install`
-4. run `yarn start`
-5. now the game is available on `localhost:4444`
+2. run `yarn install`
+3. run `yarn start`
+4. now the game is available on `localhost:4444`
 
 ### External Sources
 - __Redux__ (`react-redux`): A state management tool to handle the different game states (e.g. starting and stopping game, initialize default settings, save user defined settings like number or rows or cols or player names, update board after move, ...)
